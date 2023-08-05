@@ -1,6 +1,6 @@
 # Upload files with Remix and useFetcher
 
-### Official documentation
+### Official documentation
 
 - [Remix.run](https://remix.run/)
 - [useFetcher](https://remix.run/docs/en/1.19.2/hooks/use-fetcher)
