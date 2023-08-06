@@ -17,9 +17,10 @@ const standardFileUploadHandler: UploadHandler = createFileUploadHandler({
     directory: 'uploads'
 });
 
+const uploads: string[] = [];
 const uploadHandler = composeUploadHandlers(
-    //our custom upload handler
     async ({ name, contentType, data, filename }) => {
+
         if (name !== 'photo') {
             return undefined;
         }
@@ -33,11 +34,11 @@ const uploadHandler = composeUploadHandlers(
 
         const upload = fileUploaded as unknown as LocalUploadedFile;
 
-        return upload.name;
+        uploads.push(upload.name);
     }
 );
 
 export async function action({ request }: ActionArgs) {
-    const formData = await parseMultipartFormData(request, uploadHandler);
-    return json({ image: formData.get('photo') });
+    await parseMultipartFormData(request, uploadHandler);
+    return json({ images: uploads });
 }

@@ -16,13 +16,18 @@ export default function Index() {
                 method="post"
                 encType="multipart/form-data"
             >
-                <input type="file" name="photo" accept="image/*" />
+                <input type="file" name="photo" multiple accept="image/*" />
                 <button type="submit" disabled={state === 'submitting'}>
                     Upload
                 </button>
                 {data && (
                     <div>
-                        <pre>{`Uploaded file name: ${data.image}`}</pre>
+                        Uploaded files:<br />
+                        <code>
+                            {data.images.map((image: string, index: number) => (
+                                <span key={index}>{`- ${image}`}<br /></span>
+                            ))}
+                        </code>
                     </div>
                 )}
             </fetcher.Form>
